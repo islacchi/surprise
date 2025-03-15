@@ -18,6 +18,8 @@ body {
   background-color: var(--dark-color);
   overflow: hidden;
   perspective: 1000px;
+  position: relative; /* To position the lyrics div */
+
 }
 
 audio {
@@ -167,8 +169,8 @@ audio {
   width: 8vmin;
   height: 11vmin;
   border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
-  background-color: pink;
-  background: linear-gradient(135deg, #c8239c, #ce4983);
+  background-color: purple;
+  background: linear-gradient(135deg, rgb(73, 2, 73),purple );
   transform-origin: bottom center;
   opacity: 0.9;
   box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
@@ -188,7 +190,7 @@ audio {
   transform-origin: bottom left;
   border-radius: 4vmin 10vmin 4vmin 4vmin;
   transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
-  background: linear-gradient(135deg, #c8239c, #ce4983);
+  background: linear-gradient(135deg, rgb(73, 2, 73),purple );
   z-index: 1;
   opacity: 0.8;
 }
@@ -199,7 +201,7 @@ audio {
   width: 9vmin;
   height: 4vmin;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: purple;
 }
 .flower__white-circle::after {
   content: "";
@@ -275,7 +277,7 @@ audio {
           animation: light-ans 4s linear infinite backwards;
 }
 .flower__light:nth-child(odd) {
-  background-color: pink;
+  background-color: rgb(180, 48, 180);
 }
 .flower__light--1 {
   left: -2vmin;
@@ -1322,4 +1324,50 @@ audio {
 .container * {
   -webkit-animation-play-state: paused !important;
           animation-play-state: paused !important;
+}
+
+.lyrics {
+  position: absolute;
+  top: 5%; /* Default positioning */
+  left: 2%; /* Default positioning */
+  color: white; /* Make text color white */
+  font-family: 'Arial', sans-serif; /* Choose a font */
+  font-size: 22px; /* Responsive font size based on viewport width */
+  background: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background */
+  padding: 2%; /* Responsive padding */
+  border-radius: 5px; /* Rounded corners */
+  max-width: 18%; /* Limit width for better layout */
+  height: auto; /* Allow height to adjust based on content */
+  overflow-y: hidden; /* Hide overflow */
+  transition: opacity 0.5s ease; /* Smooth transition for text visibility */
+  -webkit-font-smoothing: antialiased; /* Improve font rendering in WebKit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Improve font rendering in Firefox for macOS */
+  text-rendering: optimizeLegibility; /* Optimize text rendering */
+}
+
+.lyrics p {
+  display: none; /* Hide all paragraphs initially */
+  opacity: 0; /* Start with all paragraphs hidden */
+  transition: opacity 1s ease; /* Smooth transition for opacity */
+}
+
+/* Media Queries for further adjustments */
+@media (max-width: 660px) {
+  .lyrics {
+      top: 13.5%; /* Position it higher for smaller screens */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Adjust for centering */
+      font-size: 4vw;
+      max-width: 90%; /* Wider for smaller screens */
+      text-align: center; /* Center align text */
+  }
+}
+
+@media (max-width: 460px) {
+  .lyrics {
+      top: 25%; /* Position it higher for smaller screens */
+      left: 50%;
+      font-size: 4vw; /* Further increase for very small screens */
+      padding: 5%; /* Adjust padding for smaller screens */
+  }
 }

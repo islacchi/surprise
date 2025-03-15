@@ -3,93 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motivation</title>
+    <title>Click Me!</title>
+    <link rel="icon" href="css/icons/hand-click.svg" type="svg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Poppins:300&display=swap">
+    <style>
+        :root {
+            --clr-neon: rgba(148, 0, 211, 1); /* Purple */
+            --clr-bg: rgba(1, 1, 1, 1);
+            --clr-white: rgba(255, 255, 255, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: var(--clr-bg);
+            font-family: 'Poppins', sans-serif;
+            color: var(--clr-neon);
+            transition: opacity 0.5s ease; /* Smooth transition for opacity */
+            opacity: 1; /* Initial opacity */
+        }
+
+        .button {
+            font-size: 2em;
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--clr-neon);
+            border: var(--clr-neon) 4px solid;
+            padding: 0.25em 1em;
+            border-radius: 0.25em;
+            text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.55), 0 0 0.5em currentColor;
+            box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+            position: relative;
+            transition: opacity 0.5s ease; /* Smooth transition for opacity */
+        }
+
+        .button::before {
+            pointer-events: none;
+            content: "";
+            position: absolute;
+            background: var(--clr-neon);
+            top: 120%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: perspective(1.2em) rotateX(40deg) scale(1.5, 0.5);
+            filter: blur(1.15em);
+            opacity: 0.7;
+            transition: transform 0.5s linear;
+        }
+
+        .button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0 0 4em 0.6em var(--clr-neon), 0 0 1em 0.2em var(--clr-white);
+            opacity: 0;
+            background: var(--clr-neon);
+            z-index: -1;
+            transition: opacity 0.5s linear;
+        }
+
+        .button:hover,
+        .button:focus {
+            color: var(--clr-bg);
+            text-shadow: none;
+        }
+
+        .button:hover::before,
+        .button:focus::before {
+            opacity: 1;
+            transform: perspective(1em) rotateX(40deg) scale(1.5, 0.6);
+            transition: transform 0.5s linear;
+        }
+
+        .button:hover::after,
+        .button:focus::after {
+            opacity: 1;
+        }
+
+        /* Fade effect */
+        .fade-out {
+            opacity: 0; /* Set to 0 for fade effect */
+            pointer-events: none; /* Prevent user interactions */
+        }
+    </style>
 </head>
 <body>
-    <div>Lami</div> 
-<div> 
-  <span>mukaog ice cream.</span>
-</div>
+    <a href="flower.html" class="button" onclick="fadeOut(event, 'flower.html')">Click me</a>
 
-<p><a href="flower.html">Click me!</a></p>
+    <script>
+        function fadeOut(event, url) {
+            event.preventDefault(); // Prevent the default anchor click behavior
+            document.body.classList.add('fade-out'); // Add fade-out class
+            setTimeout(() => {
+                window.location.href = url; // Redirect after fade-out
+            }, 1500); // Match timeout duration to CSS transition duration
+        }
+    </script>
 </body>
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto:300');
-
-body {
-  text-align:center;
-  background: #aa077f;
-  background: linear-gradient(135deg, #c8239c, #a249ce);
-  color:white;
-  font-family:'Roboto';
-  font-weight:300;
-  font-size:32px;
-  padding-top:40vh;
-  height:100vh;
-  overflow:hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -webkit-transform: translate3d(0,0,0);
-}
-
-
-div {
-  display:inline-block;
-  overflow:hidden;
-  white-space:nowrap;
-}
-
-div:first-of-type {    /* For increasing performance 
-                       ID/Class should've been used. 
-                       For a small demo 
-                       it's okaish for now */
-  animation: showup 7s infinite;
-}
-
-div:last-of-type {
-  width:0px;
-  animation: reveal 7s infinite;
-}
-
-div:last-of-type span {
-  margin-left:-355px;
-  animation: slidein 7s infinite;
-}
-
-
-@keyframes showup {
-    0% {opacity:0;}
-    20% {opacity:1;}
-    80% {opacity:1;}
-    100% {opacity:0;}
-}
-
-@keyframes slidein {
-    0% { margin-left:-800px; }
-    20% { margin-left:-800px; }
-    35% { margin-left:0px; }
-    100% { margin-left:0px; }
-}
-
-@keyframes reveal {
-    0% {opacity:0;width:0px;}
-    20% {opacity:1;width:0px;}
-    30% {width:355px;}
-    80% {opacity:1;}
-    100% {opacity:0;width:355px;}
-}
-
-
-p {
-  font-size:12px;
-  color:White;
-  margin-top:200px;
-}
-a {
-    font-size:12px;
-  color:White;
-  margin-top:200px;
-  text-decoration: none;  
-}
-</style>
 </html>
